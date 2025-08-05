@@ -43,7 +43,7 @@ input {
 	font-size: 1.2em;
 	padding: 0;
 	color: white;
-	background-color: dimgray;
+	background-color: black;
 	border: none;
 }
 
@@ -51,7 +51,8 @@ input[type=date] {
     width: 220px;
     font-size: 1.0em;
     color: white;
-    background-color: dimgray;
+    background-color: black;
+    border: none;
 }
 
 input[type=text] {
@@ -62,11 +63,15 @@ input[type=number] {
     color: white;
     font-size: 1.2em;
 }
-
+/*
 select {
 	width: 30px;
+	color: white;
+    background: none;
+    border: 1px solid white;
+    display: none;
 }
-
+*/
 .check {
     width: 24px;
 	height: 24px;
@@ -76,7 +81,7 @@ select {
 }
 
 .sign {
-    background-color: gray;
+    background: none;
 	width: 24px;
 	height: 24px;
 	margin-left:10px;
@@ -98,14 +103,13 @@ select {
 }
 
 .text-button {
-	border: 2px solid white;
-	border-radius: 10px;
+	border: none;
 	margin: 15px;
 	padding: 5px;
 	font-size:1.2em;
 	font-weight: bold;
 	color: white;
-	background-color:gray;
+	background: none;
 	float: right;
 }
 
@@ -114,9 +118,8 @@ select {
 	position: fixed;
 	width: 50px;
 	height: 50px;
-	border: 2px solid white;
-	border-radius: 10px;
-	background: gray;
+	border: none;
+	border-radius: 50%;
 	z-index: 5;
 }
 
@@ -124,7 +127,6 @@ select {
 	display: block;
 	width: 24px;
 	height: 24px;
-	padding: 13px;
 }
   
 .list {
@@ -132,7 +134,7 @@ select {
     list-style: none;
     display: flex;
     flex-direction: column;
-    background-color: dimgray;
+    background-color: #555;
     padding: 0 0.5em;
 }
 
@@ -171,13 +173,11 @@ select {
 	left: 0;
 	right: 0;
 	top: 0;
-	/* height: 48px;*/
 	padding: 10px;
 	margin: 10px;
-	border: solid white 2px;
 	border-radius: 10px;
 	color: white;
-	background-color: gray;
+	background-color: black;
 	z-index: 10;
 	display: none;
 }
@@ -189,16 +189,20 @@ select {
 
 .dialog-body {
   margin: 10px;
+  width: 100%;
   color: white;
   font-size: 1em;
+  background: none;
 }
   
 .dialog-body select {
     width: 45%;
 	height: 32px;
 	color: white;
-	background-color: dimgray;
 	font-size: 1em;
+	border: 1px solid white;
+	background-color: black;
+	/*display: none;*/
 }
 
 .dialog-buttons {
@@ -226,7 +230,7 @@ select {
     width: 100%;
     position: relative;
     color: white;
-    background-color: dimgray;
+    background-color: #555;
 }
 
 #heading {
@@ -245,6 +249,7 @@ select {
 #buttonNew {
 	right: 20px;
 	bottom: 20px;
+	background: url(add.svg) center center no-repeat;
 }
 
 #newAccountNameField {
@@ -270,9 +275,10 @@ select {
 }
 
 #txDateField {
-	width: 120px;
+	width: 125px;
 	height: 34px;
-	font-family: 'Helvetica', 'Verdana', sans-serif;
+	font-family: 'Courier',monospace;
+	border: 1px solid white;
 }
 
 #txTextField {
@@ -292,21 +298,21 @@ select {
 }
 
 #buttonAddNewAccount {
-    background: url(addButton24px.svg) center center no-repeat;
+    background: url(new24px.svg) center center no-repeat;
     float: right;
 }
 
 #buttonAddTx {
-    background: url(addButton24px.svg) center center no-repeat;
+    background: url(new24px.svg) center center no-repeat;
     float: right;
 }
 
 #buttonSaveTx {
-    background: url(okButton24px.svg) center center no-repeat;
+    background: url(ok24px.svg) center center no-repeat;
     float: right;
 }
 
 #buttonDeleteTx, #buttonDeleteConfirm {
-    background: url(deleteButton24px.svg) center center no-repeat;
+    background: url(delete24px.svg) center center no-repeat;
     float: left;
 }

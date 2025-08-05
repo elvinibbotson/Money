@@ -255,6 +255,7 @@ function openTx(n) {
 	console.log("transaction date: "+tx.date);
 	console.log("open transaction: "+txIndex+"; "+tx.text);
 	toggleDialog('txDialog',true);
+	// id('accountName').innerText=tx.account;
 	id('txAccountChooser').selectedIndex=accountNames.indexOf(tx.account);
 	id('txDateField').value=tx.date.substr(0,10);
 	id('txAmountField').value=pp(tx.amount);
@@ -268,6 +269,7 @@ function openTx(n) {
 	id('txTransferChooser').disabled=(investment)?true:false;
 	id('txMonthly').disabled=(investment)?true:false;
 	if(!investment) {
+		// id('transferName').innerText=tx.transfer;
 		while(id('txTransferChooser').options[i].text!=tx.transfer) i++;
 		id('txTransferChooser').selectedIndex=i;
 		id('txMonthly').checked=tx.monthly;

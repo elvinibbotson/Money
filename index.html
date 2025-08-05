@@ -18,7 +18,7 @@
 	<div id='listPanel'><ul id="list" class="list"></ul></div>
 	<div id='graphPanel'><canvas id='canvas' x='0' y='0' width='100%' height='100%'></canvas></div>
 	<div id='graphOverlay'><canvas id='overlay' x='0' y='0' width='100%' height='100%'></canvas></div>
-	<div id='buttonNew' class='round-button'><img src='addButton24px.svg'/></div>
+	<div id='buttonNew' class='round-button'></div>
 	<div id="newAccountDialog" class="dialog">
     	<div class="dialog-title">New account</div>
     	<div class="dialog-body"> name <input type="text" id="newAccountNameField"/></div>
@@ -33,7 +33,8 @@
 	</div>
 	<div id="txDialog" class="dialog">
     	<div class="dialog-body">
-    		<select id="txAccountChooser"></select> - <select id="txTransferChooser"></select>
+    		<select id="txAccountChooser"></select> >
+    		<select id="txTransferChooser"></select>
     	</div>
 		<div class="dialog-body"><input type="date" id="txDateField"/><span style='float:right;'>balance <span id='txBalance'>£.pp</span></span></div>
 		<div class="dialog-body"><button id='txSign' class='sign'>+</button>&nbsp;<input type="number" id="txAmountField"/>
