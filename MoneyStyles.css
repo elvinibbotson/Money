@@ -63,21 +63,13 @@ input[type=number] {
     color: white;
     font-size: 1.2em;
 }
-/*
-select {
-	width: 30px;
-	color: white;
-    background: none;
-    border: 1px solid white;
-    display: none;
-}
-*/
+
 .check {
     width: 24px;
 	height: 24px;
 	vertical-align: middle;
     float: right;
-    accent-color: dimgray;
+    accent-color: #000;
 }
 
 .sign {
@@ -134,7 +126,7 @@ select {
     list-style: none;
     display: flex;
     flex-direction: column;
-    background-color: #555;
+    background-color: #444;
     padding: 0 0.5em;
 }
 
@@ -174,8 +166,6 @@ select {
 	right: 0;
 	top: 0;
 	padding: 10px;
-	margin: 10px;
-	border-radius: 10px;
 	color: white;
 	background-color: black;
 	z-index: 10;
@@ -230,7 +220,7 @@ select {
     width: 100%;
     position: relative;
     color: white;
-    background-color: #555;
+    background-color: #444;
 }
 
 #heading {
