@@ -51,15 +51,11 @@
 		<button id='backupButton' class='text-button'>BACKUP</button>
 		<button id='restoreButton' class='text-button'>RESTORE</button>
 	</div>
-	<div id="restoreDialog" class="dialog">
-		<div id='restoreMessage' class="dialog-title">restore from file...</div>
-		<input type="file" id="fileChooser"><br>
-		(replaces existing data) or swipe left to continue
-	</div>
 	<div id='backupDialog' class='dialog'>
 		<div id='backupMessage'>data backup</div>
 		<button id='confirmBackup' class='text-button'>BACKUP</button>
 	</div>
+	<input type="file" id="fileChooser" accept=".json" style="display: none">
 </main>
 <script src="MoneyScript.js" async></script>
 </body>

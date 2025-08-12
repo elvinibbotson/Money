@@ -530,8 +530,8 @@ function drawTotals() {
 function load() {
 	var data=localStorage.getItem('MoneyData');
 	if(!data) {
-		id('restoreMessage').innerText='no data - restore?';
-		toggleDialog('restoreDialog',true);
+		alert('No data - restore backup file?');
+		toggleDialog('dataDialog',true);
 		return;
 	}
 	logs=JSON.parse(data);
@@ -611,45 +611,31 @@ function save() {
 }
 id('backupButton').addEventListener('click',function() {toggleDialog('dataDialog',false); backup();});
 id('restoreButton').addEventListener('click',function() {
-	id('restoreMessage').innerText='restore from file';
-	toggleDialog('restoreDialog',true)
-});
-id("fileChooser").addEventListener('change', function() {
-	var file=id('fileChooser').files[0];
-	console.log("file: "+file+" name: "+file.name);
-	var fileReader=new FileReader();
-	fileReader.addEventListener('load', function(evt) {
-		console.log("file read: "+evt.target.result);
-	  	var data=evt.target.result;
-		var json=JSON.parse(data);
-		console.log("json: "+json);
-		logs=[];
-		for(var i=0;i<json.logs.length;i++) { // import without any log.id
-			log={};
-			log.date=json.logs[i].date;
-			log.account=json.logs[i].account;
-			log.amount=json.logs[i].amount;
-			log.text=json.logs[i].text;
-			log.checked=json.logs[i].checked;
-			log.transfer=json.logs[i].transfer;
-			log.monthly=json.logs[i].monthly;
-			log.balance=json.logs[i].balance;
-			logs.push(log);
-		}
-		console.log(logs.length+" logs loaded");
-		if(json.totals) totals=json.totals
-		console.log('totals: '+totals);
-		// writeData(); // WAS saveLogs();
-		save();
-		/* OLD CODE...
-		data=JSON.stringify(totals);
-		window.localStorage.setItem('totals',data);
-		*/
-		toggleDialog('restoreDialog',false);
-		// display("backup imported - restart");
-		load(); // WAS readData();
-  	});
-  	fileReader.readAsText(file);
+	var event = new MouseEvent('click',{
+		bubbles: true,
+		cancelable: true,
+		view: window
+	});
+	fileChooser.dispatchEvent(event);
+	fileChooser.onchange=(event)=>{
+		var file=id('fileChooser').files[0];
+    	console.log("file name: "+file.name);
+    	var fileReader=new FileReader();
+    	fileReader.addEventListener('load', function(evt) {
+			console.log("file read: "+evt.target.result);
+    		var data=evt.target.result;
+    		var json=JSON.parse(data);
+    		logs=json.logs;
+    		console.log(logs.length+" logs loaded");
+    		if(json.totals) totals=json.totals
+			console.log('totals: '+totals);
+    		save();
+    		console.log('data imported and saved');
+    		load();
+    	});
+    	fileReader.readAsText(file);
+	}
+	toggleDialog('dataDialog',false);
 });
 id('confirmBackup').addEventListener('click',function() {toggleDialog('backupDialog',false); backup();});
 function backup() {
