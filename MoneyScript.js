@@ -530,7 +530,8 @@ function drawTotals() {
 function load() {
 	var data=localStorage.getItem('MoneyData');
 	if(!data) {
-		alert('No data - restore backup file?');
+		id('dataMessage').innerText='No data - restore backup?';
+		id('backupButton').disabled=true;
 		toggleDialog('dataDialog',true);
 		return;
 	}
@@ -600,8 +601,9 @@ function load() {
 	today=Math.floor(new Date().getTime()/86400000);
 	var days=today-backupDay;
 	if(days>4) { // backup reminder every 5 days
-		id('backupMessage').innerText=days+' days since last backup';
-		toggleDialog('backupDialog',true);
+		id('dataMessage').innerText=days+' days since last backup';
+		id('restoreButton').disabled=true;
+		toggleDialog('dataDialog',true);
 	}
 }
 function save() {
@@ -609,7 +611,7 @@ function save() {
 	window.localStorage.setItem('MoneyData',json);
 	// writeData();
 }
-id('backupButton').addEventListener('click',function() {toggleDialog('dataDialog',false); backup();});
+id('backupButton').addEventListener('click',backup);
 id('restoreButton').addEventListener('click',function() {
 	var event = new MouseEvent('click',{
 		bubbles: true,
@@ -635,9 +637,10 @@ id('restoreButton').addEventListener('click',function() {
     	});
     	fileReader.readAsText(file);
 	}
+	id('dataMessage').innerText='';
+	id('backupButton').disabled=false;
 	toggleDialog('dataDialog',false);
 });
-id('confirmBackup').addEventListener('click',function() {toggleDialog('backupDialog',false); backup();});
 function backup() {
   	var fileName="MoneyData.json";
   	var data={'logs':logs,'totals':totals};
@@ -653,8 +656,9 @@ function backup() {
     a.click();
     today=Math.floor(new Date().getTime()/86400000);
     window.localStorage.setItem('backupDay',today);
-    // display(fileName+" saved to downloads folder");
-    toggleDialog('backupDialog',false);
+    id('dataMessage').innerText='';
+    id('restoreButton').disabled=false;
+    toggleDialog('dataDialog',false);
 }
 function id(el) {
 	return document.getElementById(el);
