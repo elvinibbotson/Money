@@ -247,7 +247,7 @@ input[type=number] {
 	width: 100%;
 	height: 0;
 	background-color: #444;
-	opacity: 50%;
+	opacity: 0.6;
 }
 
 #buttonNew {
