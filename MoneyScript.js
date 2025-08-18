@@ -239,11 +239,13 @@ function toggleDialog(d,visible) {
 		id(d).style.display='block';
 		currentDialog=d;
 		id('buttonNew').style.display='none';
+		id('curtain').style.height='100%';
 	}
 	else {
 		id(d).style.display='none';
 		currentDialog=null;
 		id('buttonNew').style.display='block';
+		id('curtain').style.height='0';
 	}
 }
 // OPEN SELECTED TRANSACTION FOR EDITING
