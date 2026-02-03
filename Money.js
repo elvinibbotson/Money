@@ -69,7 +69,11 @@ id('main').addEventListener('touchend', function(event) {
     }
 })
 // TAP HEADER - DATA MENU
-id('header').addEventListener('click',function() {toggleDialog('dataDialog',true);})
+id('header').addEventListener('click',function() {
+	if(account) return;
+	toggleDialog('dataDialog',true); // ..backup/restore data
+	
+})
 /* DISPLAY MESSAGE
 function display(message) {
 	id('message').innerText=message;
@@ -82,7 +86,7 @@ id('buttonNew').addEventListener('click',function() {
 	var d=new Date().toISOString();
     if(!account) { // no account open - show new account dialog
 		console.log("new account");
-		toggleDialog('newAccountDialog',true);
+		toggleDialog('accountDialog',true);
 		id('newAccountNameField').value="";
 		id('newAccountDateField').value=d.substr(0,10);
 		id('newAccountDateField').disabled=false;
@@ -145,7 +149,7 @@ id('buttonAddNewAccount').addEventListener('click',function() {
 		if(id('newAccountInvestmentFlag').checked) tx.transfer="investment";
 		tx.monthly=false;
 		logs.push(tx);
-		toggleDialog('newAccountDialog', false);
+		toggleDialog('accountDialog', false);
 		listAccounts();
 		logs.push(tx);
 	  }
@@ -181,7 +185,7 @@ function saveTx(adding) {
 	if(id('txSign').innerHTML=="-") tx.amount*=-1;
 	if(id('txSign').innerHTML=="=") tx.text='gain';
 	else tx.text=id('txTextField').value;
-	if(investment) transfer=null;
+	if(investment) transfer='investment';
 	else {
 		var i=id('txTransferChooser').selectedIndex;
 		console.log('choose option '+i);
@@ -278,7 +282,7 @@ function openTx(n) {
 	}
 	id('buttonDeleteTx').disabled=false;
 	id('txSign').innerHTML=(tx.amount<0)?"-":"+";
-	if(tx.text=='gain') { // NEW CODE...
+	if(investment||(tx.text=='gain')) { // NEW CODE...
 		id('txSign').innerHTML='=';
 		id('txTextField').value='current value';
 		id('txTextField').disabled=true;
