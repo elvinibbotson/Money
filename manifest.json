@@ -9,6 +9,13 @@
 		"purpose": "any"
     }
   ],
+  "screenshots": [
+  	{
+		"src": "screenshot.png",
+		"sizes": "360x640",
+		"type": "image/png"
+  	}
+  ],
   "start_url": "index.html",
   "display": "standalone",
   "orientation":"portrait",
