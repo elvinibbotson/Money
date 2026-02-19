@@ -86,7 +86,7 @@ id('buttonNew').addEventListener('click',function() {
 	var d=new Date().toISOString();
     if(!account) { // no account open - show new account dialog
 		console.log("new account");
-		toggleDialog('accountDialog',true);
+		toggleDialog('newAccountDialog',true);
 		id('newAccountNameField').value="";
 		id('newAccountDateField').value=d.substr(0,10);
 		id('newAccountDateField').disabled=false;
