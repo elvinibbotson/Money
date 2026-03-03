@@ -330,6 +330,7 @@ function listAccounts() {
 		ac.index=0;
 		id('txTransferChooser').options.add(ac);
 		for(var i in accounts) {
+			console.log('list '+accounts[i].name);
 		    accountNames.push(accounts[i].name);
 			grandTotal+=parseInt(accounts[i].balance);
 			var listItem=document.createElement('li'); // add account to accounts list...
@@ -591,6 +592,7 @@ function load() {
 				logs.push(transferTX);
 			}
     	}  // END OF REPEAT TRANSACTION CODE
+    	if(logs[i].account==null) continue; // skip if null account
     	n=acNames.indexOf(logs[i].account);
 		if(n<0) {
 	  		console.log("add account "+logs[i].account);
