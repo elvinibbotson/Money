@@ -6,7 +6,7 @@ var accounts=[];
 var accountNames=[];
 var account=null;
 var acIndex=null;
-var investment=false;
+// var investment=false;
 var logData=null;
 var logs=[]; // replaces transactions
 var log=null;
@@ -92,7 +92,7 @@ id('buttonNew').addEventListener('click',function() {
 		id('newAccountDateField').disabled=false;
 		id("newAccountBalanceField").value=null;
 		id('newAccountBalanceField').placeholder="£.pp";
-		id('newAccountInvestmentFlag').checked=false; // NEW
+		// id('newAccountInvestmentFlag').checked=false; // NEW
 	}
 	else { // if viewing account, show new transaction dialog
 		toggleDialog('txDialog',true);
@@ -105,29 +105,32 @@ id('buttonNew').addEventListener('click',function() {
 		console.log("account #"+n);
 		id('txAccountChooser').selectedIndex=n;
 		id('txAccountChooser').disabled=false;
-		id('txTransferChooser').disabled=(investment)?true:false; // transfer doesn't apply for investment accounts
+		// OLD id('txTransferChooser').disabled=(investment)?true:false; // transfer doesn't apply for investment accounts
 		id('txDateField').value=d.substr(0,10);
 		id('txDateField').disabled=false;
-		id('txSign').innerHTML=(investment)?'=':'-';
+		// OLD id('txSign').innerHTML=(investment)?'=':'-';
+		id('txSign').innerHTML='-';
 		id('txAmountField').value=null;
 		id('txAmountField').placeholder="£.pp";
 		console.log("set text to blank");
-		id('txTextField').value=(investment)?"current value":"";
-		id('txTextField').disabled=(investment)?true:false; // standard text 'gain' for investment accounts
+		// OLD id('txTextField').value=(investment)?"current value":"";
+		id('txTextField').value="";
+		// OLD id('txTextField').disabled=(investment)?true:false; // standard text 'gain' for investment accounts
 		id('txTransferChooser').selectedIndex=0;
 		id('txMonthly').checked=false;
-		id('txMonthly').disabled=(investment)?true:false; // cannot have monthly investment gains
+		// OLD id('txMonthly').disabled=(investment)?true:false; // cannot have monthly investment gains
 		id('txBalance').style.color='gray';
 		id("buttonDeleteTx").style.display='none';
 		id('buttonAddTx').style.display='block';
 		id('buttonSaveTx').style.display='none';
 	}
 })
-// TOGGLE ACCOUNT STARTING BALANCE SIGN
+// CYCLE ACCOUNT STARTING BALANCE SIGN -/+/=
 id('acSign').addEventListener('click', function() {
 	var s=id('acSign').innerHTML;
 	console.log("toggle sign - currently "+s);
-  	if(s=='+') id('acSign').innerHTML="-";
+	if(s='+') id('acSign').innerHTML="=";
+  	if(s='=') d('acSign').innerHTML="-";
 	else id('acSign').innerHTML="+";
 })
 // SAVE NEW ACCOUNT
@@ -146,7 +149,7 @@ id('buttonAddNewAccount').addEventListener('click',function() {
 		tx.text="B/F";
 		tx.checked=false;
 		tx.transfer="none";
-		if(id('newAccountInvestmentFlag').checked) tx.transfer="investment";
+		// OLD if(id('newAccountInvestmentFlag').checked) tx.transfer="investment";
 		tx.monthly=false;
 		logs.push(tx);
 		toggleDialog('accountDialog', false);
@@ -158,7 +161,7 @@ id('buttonAddNewAccount').addEventListener('click',function() {
 id('txDateField').addEventListener('change', function() {
 	console.log("change date");
 })
-// TOGGLE TRANSACTION SIGN
+/* ALREADY CODED TOGGLE TRANSACTION SIGN
 id('txSign').addEventListener('click', function() {
 	var s=id('txSign').innerHTML;
 	console.log("toggle sign - currently "+s);
@@ -167,7 +170,7 @@ id('txSign').addEventListener('click', function() {
 	else id('txSign').innerHTML="+";
 	event.preventDefault();
 	event.stopPropagation();
-})
+}) */
 // SAVE NEW TRANSACTION
 id('buttonAddTx').addEventListener('click',function() {
 	saveTx(true);
@@ -183,17 +186,19 @@ function saveTx(adding) {
 	tx.date=id('txDateField').value;
 	tx.amount=Math.round(id('txAmountField').value*100);
 	if(id('txSign').innerHTML=="-") tx.amount*=-1;
-	if(id('txSign').innerHTML=="=") tx.text='gain';
+	if(id('txSign').innerHTML=="=") tx.text='...';
 	else tx.text=id('txTextField').value;
-	if(investment) transfer='investment';
-	else {
+	// OLD if(investment) transfer='investment';
+	// OLD else {
 		var i=id('txTransferChooser').selectedIndex;
 		console.log('choose option '+i);
 		var transfer=id('txTransferChooser').options[i].text;
 		console.log("transfer to:"+transfer);
 		if((transfer=="none")||(transfer==tx.transfer)) transfer=null; // (usually) no need to create reciprocal transaction
 		tx.transfer=id('txTransferChooser').options[i].text;
-	}
+	// OLD }
+	// OLD if(investment) tx.transfer='investment';
+	// OLD tx.monthly=(investment)?false:id('txMonthly').checked;
 	tx.monthly=id('txMonthly').checked;
     toggleDialog('txDialog',false);
     console.log("save transaction - date: "+tx.date+" "+tx.amount+"p - "+tx.text+" txIndex: "+txIndex);
@@ -210,7 +215,8 @@ function saveTx(adding) {
 		logs[txIndex]=tx;
 		console.log('transaction updated');
 	}
-	if(transfer) { // IF NECESSARY CREATE RECIPROCAL TRANSACTION IN TRANSFER ACCOUNT
+	// OLD if(transfer && !investment)
+	if(transfer){ // create reciprocal transaction?
 		console.log("create reciprocal transaction");
 		var t={};
 		t.account=tx.transfer;
@@ -271,18 +277,19 @@ function openTx(n) {
 	id('buttonDeleteTx').style.display='block';
 	id('buttonAddTx').style.display='none';
 	id('buttonSaveTx').style.display='block';
-	var i=0;
-	id('txTransferChooser').disabled=(investment)?true:false;
-	id('txMonthly').disabled=(investment)?true:false;
-	if(!investment) {
-		// id('transferName').innerText=tx.transfer;
-		while(id('txTransferChooser').options[i].text!=tx.transfer) i++;
-		id('txTransferChooser').selectedIndex=i;
-		id('txMonthly').checked=tx.monthly;
-	}
+	var i=id('txTransferChooser').options.length-1;
+	// OLD id('txTransferChooser').disabled=(investment)?true:false;
+	// OLD id('txMonthly').disabled=(investment)?true:false;
+	// OLD if(!investment) {
+	// id('transferName').innerText=tx.transfer;
+	while(i>0)&&(id('txTransferChooser').options[i].text!=tx.transfer)) i--;
+	id('txTransferChooser').selectedIndex=i;
+	id('txMonthly').checked=tx.monthly;
+	// OLD }
 	id('buttonDeleteTx').disabled=false;
 	id('txSign').innerHTML=(tx.amount<0)?"-":"+";
-	if(investment||(tx.text=='gain')) { // NEW CODE...
+	// OLD if(investment||(tx.text=='gain'))
+	if(tx.text=='...') { // NEW CODE...
 		id('txSign').innerHTML='=';
 		id('txTextField').value='current value';
 		id('txTextField').disabled=true;
@@ -375,12 +382,12 @@ function listTransactions() {
 	list=[];
 	for(var i=0;i<logs.length;i++) { // build list of indeces of account logs
 		if(logs[i].account==account.name) {
-			console.log('add log '+i+': '+logs[i].text+'; '+logs[i].amount);
+			console.log('add log '+i+': '+logs[i].text+'; '+logs[i].amount+'; transfer: '+logs[i].transfer);
 			list.push(i);
 		}
 	}
-	investment=logs[list[0]].transfer=='investment';
-    console.log('investment account: '+investment);
+	// OLD investment=logs[list[0]].transfer=='investment';
+    // OLD console.log('investment account: '+investment);
 	if(list.length>50) { // limit list to 50 transactions
 		console.log(logs.length+' logs; '+list.length+" items ie. >50 transactions - delete earliest");
 		if(logs[list[0]].text!='gain') {
@@ -408,9 +415,20 @@ function listTransactions() {
 	var balance=0;
 	console.log("list "+list.length+" transactions - earliest is "+list[0]+' £'+logs[list[0]].amount);
 	for(var i in list) {
-		if(logs[list[i]].text=='gain') balance=logs[list[i]].amount;
-		else balance+=logs[list[i]].amount;
+		console.log('check transaction '+i);
+		/* OLD
+		if(logs[list[i]].text=='gain') { // THIS WILL BE REDUNDENT ONCE TRANSITIONED TO NEW APPROACH
+			tx.amount=logs[list[i]].amount-logs[list[i-1]].balance; // OLD balance=logs[list[i]].amount; TRANSITION FROM OLD APPROACH
+			console.log('new amount: '+tx.amount);
+			logs[list[i]].amount=tx.amount;
+			logs[list[i]].text=tx.text='...';
+			logs[list[i]].transfer=null; // OLD tx.transfer='investment';
+			console.log('investment!');
+		}
+		*/
+		balance+=logs[list[i]].amount;
 		logs[list[i]].balance=balance;
+		// OLD investment=(tx.transfer=='investment');
 		// console.log('account balance: '+balance);
 	}
 	for(i=list.length-1;i>=0;i--) { // list in reverse order
@@ -440,10 +458,12 @@ function listTransactions() {
 		d=d.substr(8,2)+" "+months.substr(mon,3); // +" "+d.substr(2,2);
 		html="<span class='date'>"+d+"</span><span class='comment'>"+trim(tx.text,15)+"</span>";
 		var a=tx.amount;
+		/* OLD
 		if(investment && tx.text=='gain') {
 			console.log('investment');
 			a=tx.amount-logs[list[i-1]].balance;
 		}
+		*/
 		if(a<0) html+="<span class='amount-debit'>";
 		else html+="<span class='amount'>";
 		html+=pp(a);
@@ -617,7 +637,6 @@ function load() {
 function save() {
 	var json=JSON.stringify(logs);
 	window.localStorage.setItem('MoneyData',json);
-	// writeData();
 }
 id('backupButton').addEventListener('click',backup);
 id('restoreButton').addEventListener('click',function() {
