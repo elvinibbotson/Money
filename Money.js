@@ -282,7 +282,7 @@ function openTx(n) {
 	// OLD id('txMonthly').disabled=(investment)?true:false;
 	// OLD if(!investment) {
 	// id('transferName').innerText=tx.transfer;
-	while(i>0)&&(id('txTransferChooser').options[i].text!=tx.transfer)) i--;
+	while((i>0)&&(id('txTransferChooser').options[i].text!=tx.transfer)) i--;
 	id('txTransferChooser').selectedIndex=i;
 	id('txMonthly').checked=tx.monthly;
 	// OLD }
