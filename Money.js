@@ -167,8 +167,7 @@ function saveTx(adding) {
 	tx.date=id('txDateField').value;
 	tx.amount=Math.round(id('txAmountField').value*100);
 	if(id('txSign').innerHTML=="-") tx.amount*=-1;
-	
-	else tx.text=id('txTextField').value;
+	tx.text=id('txTextField').value;
 	tx.monthly=id('txMonthly').checked;
     toggleDialog('txDialog',false);
     console.log("save transaction - date: "+tx.date+" "+tx.amount+"p - "+tx.text+" txIndex: "+txIndex);
@@ -189,6 +188,7 @@ function saveTx(adding) {
 		logs[txIndex]=tx;
 		console.log('transaction updated');
 	}
+	/*
 	if(transfer){ // create reciprocal transaction?
 		console.log("create reciprocal transaction");
 		var t={};
@@ -202,6 +202,7 @@ function saveTx(adding) {
 		logs.push(t);
 		console.log("reciprocal transaction added in "+transfer+" account");
 	}
+	*/
 	logs.sort(function(a,b) {return Date.parse(a.date)-Date.parse(b.date)}); // chronological order
 	save();
 	listTransactions();
@@ -375,7 +376,7 @@ function listTransactions() {
 	balance=0;
 	console.log("list "+list.length+" transactions - earliest is "+list[0]+' £'+logs[list[0]].amount);
 	for(var i in list) {
-		console.log('check transaction '+i);
+		console.log('check transaction '+i+': '+logs[list[i]].text);
 		balance+=logs[list[i]].amount;
 		logs[list[i]].balance=balance;
 	}
