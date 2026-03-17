@@ -121,8 +121,8 @@ id('buttonNew').addEventListener('click',function() {
 id('txSign').addEventListener('click', function() {
 	var s=id('txSign').innerHTML;
 	console.log("toggle sign - currently "+s);
-	if(s='+') id('txSign').innerHTML="=";
-  	if(s='=') d('txSign').innerHTML="-";
+	if(s=='+') id('txSign').innerHTML="=";
+  	else if(s=='=') id('txSign').innerHTML="-";
 	else id('txSign').innerHTML="+";
 })
 // SAVE NEW ACCOUNT
