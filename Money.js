@@ -164,6 +164,12 @@ id('buttonSaveTx').addEventListener('click',function() {
 // ADD/SAVE TRANSACTION
 function saveTx(adding) {
 	tx.account=accountNames[id('txAccountChooser').selectedIndex];
+	
+	var i=id('txTransferChooser').selectedIndex;
+	console.log('transfer choice: '+i);
+	tx.transfer=id('txTransferChooser').options[i].text;
+	console.log('transfer to '+tx.transfer);
+	
 	tx.date=id('txDateField').value;
 	tx.amount=Math.round(id('txAmountField').value*100);
 	if(id('txSign').innerHTML=="-") tx.amount*=-1;
@@ -188,8 +194,8 @@ function saveTx(adding) {
 		logs[txIndex]=tx;
 		console.log('transaction updated');
 	}
-	/*
-	if(transfer){ // create reciprocal transaction?
+	
+	if(tx.transfer!='none'){ // create reciprocal transaction?
 		console.log("create reciprocal transaction");
 		var t={};
 		t.account=tx.transfer;
@@ -200,9 +206,9 @@ function saveTx(adding) {
 		t.transfer="none";
 		t.monthly=false;
 		logs.push(t);
-		console.log("reciprocal transaction added in "+transfer+" account");
+		console.log("reciprocal transaction added in "+tx.transfer+" account");
 	}
-	*/
+	
 	logs.sort(function(a,b) {return Date.parse(a.date)-Date.parse(b.date)}); // chronological order
 	save();
 	listTransactions();
