@@ -40,8 +40,11 @@ id('main').addEventListener('touchend', function(event) {
     	}
     	else if(dragX<-50) { // drag left
     	// console.log('DRAG LEFT');
+    		/*
     		if(currentDialog) toggleDialog(currentDialog,false); // close an open dialog or...
-    		else if(account) { // ...switch to account graph view
+    		else 
+    		*/
+    		if(account) { // ...switch to account graph view
     			view='graph';
     			id('listPanel').style.display='none';
     			id('buttonNew').style.display='none';
@@ -222,6 +225,10 @@ id('buttonDeleteTx').addEventListener('click', function() {
 	save(); // writeData(); WAS saveLogs();
 	listTransactions();
 });
+// CLOSE DIALOG
+id('curtain').addEventListener('click',function() {
+	toggleDialog(currentDialog,false);
+})
 // SHOW/HIDE DIALOGS
 function toggleDialog(d,visible) {
 	if(visible) {
