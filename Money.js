@@ -713,15 +713,7 @@ if(!syncDay) {
 }
 load();
 if(new Date()/86400000-syncDay>5) message('More than 5 days since last sync.');
-// implement service worker if browser is PWA friendly
-if (navigator.serviceWorker.controller) {
-	console.log('Active service worker found, no need to register')
-}
-else { //Register the ServiceWorker
-	navigator.serviceWorker.register('sw.js').then(function(reg) {
-		console.log('Service worker has been registered for scope:'+ reg.scope);
-	});
-}
+// SERVICE WORKER
 if(navigator.serviceWorker.controller) {
 	console.log('Active service worker found, no need to register')
 }
