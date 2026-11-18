@@ -584,7 +584,7 @@ function connect() {
 		auth.login({
     		oidcIssuer:"https://privatedatapod.com",
     		redirectUrl:window.location.href,
-    		clientName:"SolidMoney"
+    		clientName:"Money"
     	});
 	}
 	catch(error) {console.error(error.message);}
@@ -601,7 +601,7 @@ async function sync() {
 	latest=window.localStorage.getItem('latest');
 	console.log('latest is '+latest);
 	message('SYNC - DOWNLOAD?',true);
-	var response=await session.fetch('https://elvinibbotson.privatedatapod.com/drive/SolidMoneyData.json',
+	var response=await session.fetch('https://elvinibbotson.privatedatapod.com/drive/MoneyData.json',
 	{ // ONLY RESTORE DATA FROM POD IF NEWER THAN CURRENT LOCAL DATA
 		method: 'GET',
 		headers: {'If-Modified-Since':latest}
@@ -629,7 +629,7 @@ async function sync() {
 async function upload() {
 	if(!session.info.isLoggedIn) {connect(); return;} // ensure connected
   	console.log("UPLOAD",false);
-	var fileName="drive/SolidMoneyData.json";
+	var fileName="drive/MoneyData.json";
 	console.log(logs.length+" logs - upload");
 	
 	if(logs.length<1) {
