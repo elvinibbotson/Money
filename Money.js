@@ -287,7 +287,7 @@ function listAccounts() {
 	console.log("list "+accounts.length+" accounts");
   	var item = null;
 	id('list').innerHTML="";
-	var html="SolidMoney";
+	var html="Accounts";
 	if(accounts.length>0) {
 	    accounts.sort(function(a,b) { return (a.name>b.name)?1:-1}); //alpha-sort on account names
 		console.log("accounts sorted - first: "+accounts[0].name);
@@ -323,7 +323,7 @@ function listAccounts() {
 			id('txTransferChooser').options.add(ac);
 	  	}
 	  	console.log("transfer option 0: "+id('txTransferChooser').options[0].text);
-		html="SolidMoney <span class='amount'>"+pp(grandTotal)+"</span>";
+		html="Accounts <span class='amount'>"+pp(grandTotal)+"</span>";
 		today=new Date();
 		var month=today.getMonth()+1;
 		console.log('save total '+grandTotal+' for month '+month);
