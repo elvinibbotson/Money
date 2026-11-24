@@ -112,14 +112,6 @@ id('buttonNew').addEventListener('click',function() {
 		id('buttonSaveTx').style.display='none';
 	}
 })
-// CYCLE AMOUNT SIGN -/+/=
-id('txSign').addEventListener('click', function() {
-	var s=id('txSign').innerHTML;
-	console.log("toggle sign - currently "+s);
-	if(s=='+') id('txSign').innerHTML="=";
-  	else if(s=='=') id('txSign').innerHTML="-";
-	else id('txSign').innerHTML="+";
-})
 // SAVE NEW ACCOUNT
 id('buttonAddNewAccount').addEventListener('click',function() {
 	var name=id('newAccountNameField').value.trim(); // remove whitespace
@@ -143,10 +135,33 @@ id('buttonAddNewAccount').addEventListener('click',function() {
 		listAccounts();
 	  }
 })
+// CHANGE TRANSACTION ACCOUNT
+id('txAccountChooser').addEventListener('change',setSave);
+// CHANGE TRANSACTION TRANSFER
+id('txTransferChooser').addEventListener('change',setSave);
+// CYCLE AMOUNT SIGN -/+/=
+id('txSign').addEventListener('click', function() {
+	var s=id('txSign').innerHTML;
+	console.log("toggle sign - currently "+s);
+	if(s=='+') id('txSign').innerHTML="=";
+  	else if(s=='=') id('txSign').innerHTML="-";
+	else id('txSign').innerHTML="+";
+	setSave();
+})
 // CHANGE TRANSACTION DATE
 id('txDateField').addEventListener('change', function() {
 	console.log("change date");
+	setSave();
 })
+// CHANGE TRANSACTION AMOUNT
+id('txAmountField').addEventListener('change',setSave);
+// CHANGE TRANSACTION DESCRIPTION
+id('txTextField').addEventListener('change',setSave);
+// ALLOW SAVING OF UPDATED TRANSACTION
+function setSave() {
+	console.log('transaction changed');
+	id('buttonSaveTx').style.display='block';
+}
 // SAVE NEW TRANSACTION
 id('buttonAddTx').addEventListener('click',function() {
 	saveTx(true);
@@ -249,7 +264,7 @@ function openTx(n) {
 	id('txBalance').style.color=(tx.balance<0)?'yellow':'white';
 	id('buttonDeleteTx').style.display='block';
 	id('buttonAddTx').style.display='none';
-	id('buttonSaveTx').style.display='block';
+	id('buttonSaveTx').style.display='none';
 	var i=id('txTransferChooser').options.length-1;
 	while((i>0)&&(id('txTransferChooser').options[i].text!=tx.transfer)) i--;
 	id('txTransferChooser').selectedIndex=i;
@@ -396,7 +411,7 @@ function listTransactions() {
 			tx.checked=!tx.checked;
 			console.log("checked is "+tx.checked);
 			logs[list[this.index]]=tx;
-			// saveTx(false);
+			setSave();
 			save();
 		});
 		listItem.appendChild(itemCheck);

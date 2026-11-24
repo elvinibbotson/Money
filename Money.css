@@ -48,7 +48,7 @@ input {
 }
 
 input[type=date] {
-    width: 220px;
+    width: 20%;
     font-size: 1.0em;
     color: white;
     background-color: black;
@@ -90,7 +90,7 @@ input[type=number] {
   color: white;
   background: black;
   position: fixed;
-  font-size: 1.0em;
+  font-size: 1.2em;
   z-index: 5;
 }
 
@@ -146,10 +146,9 @@ input[type=number] {
 .list-item {
 	width: 100%;
 	padding-top: 10px;
-	padding-bottom: 10px;
 	text-align: left;
 	color: white;
-	font-size: 1.0em; 
+	font-size: 1.2em; 
 	display: block;
 }
 
@@ -194,7 +193,7 @@ input[type=number] {
   margin: 10px;
   width: 100%;
   color: white;
-  font-size: 1em;
+  font-size: 1.0em;
   background: none;
 }
   
@@ -202,7 +201,7 @@ input[type=number] {
     width: 45%;
 	height: 32px;
 	color: white;
-	font-size: 1em;
+	font-size: 1.0em;
 	border: 1px solid white;
 	background-color: black;
 	/*display: none;*/
@@ -239,7 +238,6 @@ input[type=number] {
 #heading {
   font-family: 'Courier',monospace;
   font-weight: bold;
-  font-size: 1.0em;
   margin: 10px;
 }
 
@@ -295,12 +293,11 @@ input[type=number] {
 }
 
 #txTextField {
-  width: 100%;
+  width: 90%;
 }
 
 #txAmountField {
     color: white;
-    font-size: 1.2em;
 }
 
 #buttonAddNewAccount {
