@@ -146,6 +146,7 @@ input[type=number] {
 .list-item {
 	width: 100%;
 	padding-top: 10px;
+	padding-bottom: 10px;
 	text-align: left;
 	color: white;
 	font-size: 1.0em; 
