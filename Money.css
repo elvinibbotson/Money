@@ -90,7 +90,7 @@ input[type=number] {
   color: white;
   background: black;
   position: fixed;
-  font-size: 1.2em;
+  font-size: 1.5em;
   z-index: 5;
 }
 
@@ -193,7 +193,7 @@ input[type=number] {
   margin: 10px;
   width: 100%;
   color: white;
-  font-size: 1.0em;
+  font-size: 1.2em;
   background: none;
 }
   
@@ -201,7 +201,7 @@ input[type=number] {
     width: 45%;
 	height: 32px;
 	color: white;
-	font-size: 1.0em;
+	font-size: 1.2em;
 	border: 1px solid white;
 	background-color: black;
 	/*display: none;*/

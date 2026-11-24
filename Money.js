@@ -100,12 +100,9 @@ id('buttonNew').addEventListener('click',function() {
 		id('txAmountField').value=null;
 		id('txAmountField').placeholder="£.pp";
 		console.log("set text to blank");
-		// OLD id('txTextField').value=(investment)?"current value":"";
 		id('txTextField').value="";
-		// OLD id('txTextField').disabled=(investment)?true:false; // standard text 'gain' for investment accounts
 		id('txTransferChooser').selectedIndex=0;
 		id('txMonthly').checked=false;
-		// OLD id('txMonthly').disabled=(investment)?true:false; // cannot have monthly investment gains
 		id('txBalance').style.color='gray';
 		id("buttonDeleteTx").style.display='none';
 		id('buttonAddTx').style.display='block';
@@ -160,7 +157,7 @@ id('txTextField').addEventListener('change',setSave);
 // ALLOW SAVING OF UPDATED TRANSACTION
 function setSave() {
 	console.log('transaction changed');
-	id('buttonSaveTx').style.display='block';
+	if(id('buttonAddTx').style.display!='block') id('buttonSaveTx').style.display='block';
 }
 // SAVE NEW TRANSACTION
 id('buttonAddTx').addEventListener('click',function() {
